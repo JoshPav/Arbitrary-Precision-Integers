@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include <iostream>
+#include <stdexcept>
 
 namespace ExactArithmetic
 {
@@ -24,7 +25,7 @@ namespace ExactArithmetic
       // Accepts a sequence of digits.
       // For any other input, throws a std::invalid_argument exception.
       // (For full integers, it should also allow an optional initial  '+' or '-' character.)
-      explicit Integer(const std::string &);
+      explicit Integer(const std::string &) throw (std::invalid_argument);
 
       //  Arithmetic Operators
       Integer operator+(const Integer &) const;

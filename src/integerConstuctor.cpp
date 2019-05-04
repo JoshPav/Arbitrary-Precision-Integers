@@ -15,23 +15,37 @@ BOOST_AUTO_TEST_CASE(useDefaultConstructor){
   BOOST_CHECK_EQUAL(s, "0");
 }
 
-BOOST_AUTO_TEST_CASE(minumum){
+BOOST_AUTO_TEST_CASE(smallNum){
   Integer newInt(0);
   std::string s = newInt.toString();
   BOOST_CHECK_EQUAL(s, "0");
 }
 
-BOOST_AUTO_TEST_CASE(maximum){
-  Integer newInt(18446744073709551);
+BOOST_AUTO_TEST_CASE(bigNum){
+  Integer newInt(18446744073709551615);
   std::string s = newInt.toString();
-  BOOST_CHECK_EQUAL(s, "18446744073709551");
-}
-BOOST_AUTO_TEST_CASE(lessThanMinumum){
-  BOOST_CHECK_THROW(Integer(-1), std::invalid_argument);
+  BOOST_CHECK_EQUAL(s, "18446744073709551615");
 }
 
-BOOST_AUTO_TEST_CASE(greaterThanMaximum){
-  BOOST_CHECK_THROW(Integer(18446744073709552), std::invalid_argument);
+BOOST_AUTO_TEST_CASE(stringSimpleValue){
+  Integer newInt("00");
+  std::string s = newInt.toString();
+  BOOST_CHECK_EQUAL(s, "0");
+}
+
+BOOST_AUTO_TEST_CASE(stringLongValue){
+  Integer newInt("94374023974587495302570234587490573458758390");
+  std::string s = newInt.toString();
+  BOOST_CHECK_EQUAL(s, "94374023974587495302570234587490573458758390");
+}
+
+BOOST_AUTO_TEST_CASE(stringLeadingZeros){
+  Integer newInt("0000000001");
+  std::string s = newInt.toString();
+  BOOST_CHECK_EQUAL(s, "1");
+}
+BOOST_AUTO_TEST_CASE(stringInvalidInput){
+  BOOST_CHECK_THROW(Integer("02914-0970974021%%"), std::invalid_argument);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
