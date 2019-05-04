@@ -34,9 +34,8 @@ run: $(OUTPUT_DIR)/$(TARGET)
 	@ ./$(OUTPUT_DIR)/$(TARGET)
 
 run_tests: $(OUTPUT_DIR)/$(TEST_TARGET)
-	@ ./$(OUTPUT_DIR)/$(TEST_TARGET)
-
-
+	@ ./$(OUTPUT_DIR)/$(TEST_TARGET) 
+	
 # Make object files
 $(OBJECTS): $(BUILD_DIR)/%.o : $(SOURCE_DIR)/%.cpp
 	@ $(CC) $(CFLAGS) -c $< -o $@

@@ -31,6 +31,15 @@ BOOST_AUTO_TEST_SUITE(ConstructorTests)
         BOOST_CHECK_EQUAL(std::to_string(lInt), aInt.toString());
     }
 
+    BOOST_AUTO_TEST_CASE ( StringZeroTest)
+    {
+        std::string myString = "0";
+
+        ExactArithmetic::Integer aInt(myString);
+
+        BOOST_CHECK_EQUAL("0", aInt.toString());
+    }
+
     BOOST_AUTO_TEST_CASE( CheckString)
     {
         std::string myString = "184467440737095533123123242316131231923719235";
@@ -64,7 +73,9 @@ BOOST_AUTO_TEST_SUITE(ConstructorTests)
         BOOST_CHECK_THROW(ExactArithmetic::Integer("-1"),std::invalid_argument);
     }
 
+
 BOOST_AUTO_TEST_SUITE_END()
+
 
 BOOST_AUTO_TEST_SUITE ( ComparisonTests)
 
@@ -79,7 +90,7 @@ BOOST_AUTO_TEST_SUITE ( ComparisonTests)
     BOOST_AUTO_TEST_CASE( EqualFalse )
     {
         ExactArithmetic::Integer aInt1("461651252542");
-        ExactArithmetic::Integer aInt2("461651252542");
+        ExactArithmetic::Integer aInt2("4551541");
 
         BOOST_CHECK ( (aInt1 == aInt2) == false);
     }
@@ -99,10 +110,18 @@ BOOST_AUTO_TEST_SUITE ( ComparisonTests)
 
         BOOST_CHECK ( (aInt1 != aInt2) == false);
     }
-
+    
     BOOST_AUTO_TEST_CASE( LessThanTrue )
     {
-        ExactArithmetic::Integer aInt1("726266");
+        ExactArithmetic::Integer aInt1("234");
+        ExactArithmetic::Integer aInt2("7826978");
+
+        BOOST_CHECK_LT ( aInt1 ,aInt2);
+    }
+    
+    BOOST_AUTO_TEST_CASE( LessThanSameSize )
+    {
+        ExactArithmetic::Integer aInt1("7826977");
         ExactArithmetic::Integer aInt2("7826978");
 
         BOOST_CHECK_LT ( aInt1 ,aInt2);
@@ -123,7 +142,7 @@ BOOST_AUTO_TEST_SUITE ( ComparisonTests)
 
         BOOST_CHECK ( (aInt1  < aInt2) == false );
     }    
-
+    
     BOOST_AUTO_TEST_CASE( GreaterThanTrue )
     {
         ExactArithmetic::Integer aInt1("2562156515415");
@@ -148,6 +167,14 @@ BOOST_AUTO_TEST_SUITE ( ComparisonTests)
         BOOST_CHECK ( (aInt1  > aInt2) == false );
     }  
 
+    BOOST_AUTO_TEST_CASE( GreaterThanSameSize )
+    {
+        ExactArithmetic::Integer aInt1("12552174551");
+        ExactArithmetic::Integer aInt2("12552167451");
+
+        BOOST_CHECK_GT ( aInt1,  aInt2);
+    }  
+    /*
     BOOST_AUTO_TEST_CASE( LessThanEqualTrue )
     {
         ExactArithmetic::Integer aInt1("456163522");
@@ -195,5 +222,5 @@ BOOST_AUTO_TEST_SUITE ( ComparisonTests)
 
         BOOST_CHECK_GE ( aInt1 , aInt2 );
     }
-
+    */
 BOOST_AUTO_TEST_SUITE_END()
