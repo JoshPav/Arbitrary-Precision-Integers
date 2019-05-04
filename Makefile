@@ -1,34 +1,19 @@
-CC=g++
-CFLAGS = -std=c++17 -Wall -g -I $(HEADER_DIR)
 
-SOURCE_DIR = src
-HEADER_DIR = headers
-BUILD_DIR = obj
-OUTPUT_DIR = bin
+INCLUDEDIR = ../headers/
+CXXFLAGS   = -std=c++11 -I $(INCLUDEDIR) -Wall -Wfatal-errors
+OUTPUTS = integer.o
+EXECUTABLES = integer
 
-TARGET = Output.exe
-OBJECTS = $(addprefix $(BUILD_DIR)/, main.o)
+vpath %.h $(INCLUDEDIR)
 
 
-make_directories:
-	mkdir -p $(BUILD_DIR)
-	mkdir -p $(OUTPUT_DIR)
+all: $(EXECUTABLES)
 
-all: build run clean
-	
-run: $(OUTPUT_DIR)/$(TARGET)
-	./$(OUTPUT_DIR)/$(TARGET)
+%integer: %integer.cpp integer.o
+	g++ $(CXXFLAGS) $@.cpp integer.o -o $@
 
-#Compile all Files
-build: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(OUTPUT_DIR)/$(TARGET) $(OBJECTS)
+%.o : %.cpp %.h
+	g++ $(CXXFLAGS) -c $^
 
-#Main object file
-$(BUILD_DIR)/main.o: make_directories $(SOURCE_DIR)/main.cpp
-	$(CC) $(CFLAGS) -c $(SOURCE_DIR)/main.cpp -o $@
-
-#Cleans all object files
 clean:
-	rm -rf $(BUILD_DIR) $(OUTPUT_DIR)
-
-	
+	rm -f $(OUTPUTS) $(EXECUTABLES)
