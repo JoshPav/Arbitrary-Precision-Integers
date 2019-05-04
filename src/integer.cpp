@@ -1,42 +1,44 @@
 #include "integer.h"
 
+namespace ExactArithmetic{
+
 // ================================
 //          Constructors
 // ================================
 
-ExactArithmetic::Integer::Integer(){
-    digits.push_back(0);
-}
-
-ExactArithmetic::Integer::Integer(unsigned long long int I){
-    for(char c : std::to_string(I)){
-        digits.push_back(c-'0');
+    Integer::Integer(){
+        digits.push_back(0);
     }
-}
 
-ExactArithmetic::Integer::Integer(const std::string &S){
-    // Check if first symbol is valid
-    for(auto cit = S.begin(); cit != S.end(); cit++){
-        if(48 <= *cit && *cit<= 57){
-            if(*cit == 48){
-                if((digits.size() == 0) && cit != S.end()-1){
-                    continue;
+    Integer::Integer(unsigned long long int I){
+        for(char c : std::to_string(I)){
+            digits.push_back(c-'0');
+        }
+    }
+
+    Integer::Integer(const std::string &S){
+        // Check if first symbol is valid
+        for(auto cit = S.begin(); cit != S.end(); cit++){
+            if(48 <= *cit && *cit<= 57){
+                if(*cit == 48){
+                    if((digits.size() == 0) && cit != S.end()-1){
+                        continue;
+                    }
                 }
+                digits.push_back(*cit-'0');
             }
-            digits.push_back(*cit-'0');
-        }
-        else{
-            throw std::invalid_argument("Invalid Input");
+            else{
+                throw std::invalid_argument("Invalid Input");
+            }
         }
     }
-}
 
-// ================================
-//      Comparison Operators
-// ================================
+    // ================================
+    //      Comparison Operators
+    // ================================
 
     // ==
-    bool ExactArithmetic::Integer::Integer::operator==(const ExactArithmetic::Integer & other) const{
+    bool Integer::Integer::operator==(const Integer & other) const{
         
         if(digits.size() == other.digits.size()){
             auto thisIt = digits.begin();
@@ -56,7 +58,7 @@ ExactArithmetic::Integer::Integer(const std::string &S){
     };
 
     // !=
-    bool ExactArithmetic::Integer::Integer::operator!=(const ExactArithmetic::Integer & other) const{
+    bool Integer::Integer::operator!=(const Integer & other) const{
 
         if(digits.size() == other.digits.size()){
             auto thisIt = digits.begin();
@@ -76,7 +78,7 @@ ExactArithmetic::Integer::Integer(const std::string &S){
     };
 
     // <
-    bool ExactArithmetic::Integer::Integer::operator<(const ExactArithmetic::Integer & other) const{
+    bool Integer::Integer::operator<(const Integer & other) const{
         if(digits.size() < other.digits.size()){
             return true;
         }
@@ -91,38 +93,40 @@ ExactArithmetic::Integer::Integer(const std::string &S){
     };
 
     // <=
-    bool ExactArithmetic::Integer::Integer::operator<=(const ExactArithmetic::Integer &) const{
+    bool Integer::Integer::operator<=(const Integer &) const{
 
         return true;        
     };
 
     // >
-    bool ExactArithmetic::Integer::Integer::operator>(const ExactArithmetic::Integer & other) const{
+    bool Integer::Integer::operator>(const Integer & other) const{
         return other < *this;
     };
 
     // >=
-    bool ExactArithmetic::Integer::Integer::operator>=(const ExactArithmetic::Integer &) const{
+    bool Integer::Integer::operator>=(const Integer &) const{
 
         return true;
     };
-    
 
-// ================================
-//      Friend Declarations
-// ================================
 
-    std::ostream & ExactArithmetic::operator<<(std::ostream & os, const ExactArithmetic::Integer & I){
+    // ================================
+    //      Friend Declarations
+    // ================================
+
+    std::ostream & operator<<(std::ostream & os, const Integer & I){
         os << I.toString();
         return os;
     }
 
 
-std::string ExactArithmetic::Integer::toString() const{
-    // Loop through list appending digit to string
-    std::string S = "";
-    for(short int I : digits){
-        S += std::to_string(I);
+    std::string Integer::toString() const{
+        // Loop through list appending digit to string
+        std::string S = "";
+        for(short int I : digits){
+            S += std::to_string(I);
+        }
+        return S;
     }
-    return S;
+
 }
