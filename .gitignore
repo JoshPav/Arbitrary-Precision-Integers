@@ -1,2 +1,2 @@
 *.o
-Makefile*
+*.h.gch
