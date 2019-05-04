@@ -63,6 +63,8 @@ namespace ExactArithmetic
     private:
       using Digit = short int;
 
+      int compare(const Integer &) const;
+
       // The integer is represented as a list of digits.
       std::list<Digit> digits {};
   };

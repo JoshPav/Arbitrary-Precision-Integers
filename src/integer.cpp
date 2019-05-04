@@ -39,76 +39,47 @@ namespace ExactArithmetic{
 
     // ==
     bool Integer::Integer::operator==(const Integer & other) const{
-        
-        if(digits.size() == other.digits.size()){
-            auto thisIt = digits.begin();
-            auto otherIt = other.digits.begin();
-            while(thisIt != digits.end() && otherIt != other.digits.end()){
-                if(*thisIt == *otherIt){
-                    thisIt++;
-                    otherIt++;
-                }
-                else
-                    return false; 
-            }
-            return true;
-        }
-        else
-            return false;
+        return compare(other) == 0;
     };
 
     // !=
     bool Integer::Integer::operator!=(const Integer & other) const{
-
-        if(digits.size() == other.digits.size()){
-            auto thisIt = digits.begin();
-            auto otherIt = other.digits.begin();
-            while(thisIt != digits.end() && otherIt != other.digits.end()){
-                if(*thisIt != *otherIt){
-                    thisIt++;
-                    otherIt++;
-                }
-                else
-                    return false; 
-            }
-            return true;
-        }
-        else
-            return true;
+        return compare(other) != 0;
     };
 
     // <
     bool Integer::Integer::operator<(const Integer & other) const{
-        if(digits.size() < other.digits.size()){
-            return true;
-        }
-        else if(digits.size() > other.digits.size()){
-            return false;
-        }
-        else{
-            auto Pair = std::mismatch(digits.begin(),digits.end(),
-                                other.digits.begin(),other.digits.end());
-            return *Pair.first < *Pair.second;
-        }
+        return compare(other) < 0;
     };
 
     // <=
-    bool Integer::Integer::operator<=(const Integer &) const{
-
-        return true;        
+    bool Integer::Integer::operator<=(const Integer & other) const{
+        return compare(other) <= 0;
     };
 
     // >
     bool Integer::Integer::operator>(const Integer & other) const{
-        return other < *this;
+        return compare(other) > 0;
     };
 
     // >=
-    bool Integer::Integer::operator>=(const Integer &) const{
-
-        return true;
+    bool Integer::Integer::operator>=(const Integer & other) const{
+        return compare(other) >= 0;
     };
 
+    int Integer::compare(const Integer & other) const{
+        if(digits.size() < other.digits.size()){
+            return -1;
+        }
+        else if(digits.size() > other.digits.size()){
+            return 1;
+        }
+        else{
+            auto Pair = std::mismatch(digits.begin(),digits.end(),
+                                other.digits.begin(),other.digits.end());
+            return *Pair.first - *Pair.second;
+        }
+    }
 
     // ================================
     //      Friend Declarations

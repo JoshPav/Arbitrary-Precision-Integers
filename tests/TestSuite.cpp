@@ -174,7 +174,7 @@ BOOST_AUTO_TEST_SUITE ( ComparisonTests)
 
         BOOST_CHECK_GT ( aInt1,  aInt2);
     }  
-    /*
+    
     BOOST_AUTO_TEST_CASE( LessThanEqualTrue )
     {
         ExactArithmetic::Integer aInt1("456163522");
@@ -222,5 +222,5 @@ BOOST_AUTO_TEST_SUITE ( ComparisonTests)
 
         BOOST_CHECK_GE ( aInt1 , aInt2 );
     }
-    */
+    
 BOOST_AUTO_TEST_SUITE_END()
