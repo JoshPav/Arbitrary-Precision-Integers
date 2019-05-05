@@ -1,5 +1,6 @@
-
 main.cpp
 .vscode/ipch/
 bin/
 obj/
+*.o
+*.h.gch

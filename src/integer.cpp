@@ -152,6 +152,30 @@ namespace ExactArithmetic{
         }
     }
 
+    //Arithmetic Operators
+    Integer Integer::operator+(const Integer & toAdd) const{
+        Integer temp;
+        if(digits.size() > toAdd.digits.size()){
+            return additionHelper(*this, toAdd);
+        }
+        else{
+            return additionHelper(toAdd, *this);
+        }
+    }
+
+    Integer Integer::additionHelper(const Integer & larger, const Integer & smaller) const{
+        Integer temp(larger.toString());
+        auto toAddItr = smaller.digits.end();
+        auto itr = temp.digits.end();
+        do{
+            toAddItr--;
+            itr--;
+            *itr += *toAddItr;
+        }while(toAddItr != smaller.digits.begin());
+        temp.normalise();
+        return temp;
+    }
+
     // ================================
     //       Compound Operators
     // ================================
@@ -225,4 +249,5 @@ namespace ExactArithmetic{
                 digits.erase(D++);
         }
     }
+
 }
