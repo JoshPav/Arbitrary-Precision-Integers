@@ -59,6 +59,7 @@ namespace ExactArithmetic
       std::string toString() const;
       int compare(const Integer &) const;
       void normalise();
+      Integer additionHelper(const Integer &, const Integer &) const;
 
       // Friend declarations
       friend std::ostream & operator<<(std::ostream &, const Integer &);
