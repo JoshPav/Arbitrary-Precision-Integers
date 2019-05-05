@@ -18,13 +18,15 @@ TESTS = $(wildcard $(TEST_DIR)/*.cpp)
 # Objects
 OBJECTS = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
 TEST_OBJECTS = $(patsubst $(TEST_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(TESTS))
+TEST_OBJECTS := $(filter-out $(TEST_DIR)/ArithmeticTests.cpp, $(TEST_OBJECTS))
 
-tests = ConstructorTests,ComparisonTests,IncrementTests,ArithmeticTests
+tests = ConstructorTests,ComparisonTests,IncrementTests
 log_lvl = error
 
 make_directories:
 	@ mkdir -p $(BUILD_DIR)
 	@ mkdir -p $(OUTPUT_DIR)
+
 
 # Compile all files
 all: build run clean
@@ -50,7 +52,7 @@ build: make_directories $(OBJECTS)
 	@ $(CC) $(CFLAGS) $(OBJECTS) -o $(OUTPUT_DIR)/$(TARGET)
 
 build_tests: make_directories $(OBJECTS) $(TEST_OBJECTS)
-	@ $(CC) $(CFLAGS) $(OBJECTS) $(TEST_OBJECTS) -lboost_unit_test_framework  -o $(OUTPUT_DIR)/$(TEST_TARGET)
+	-@ $(CC) $(CFLAGS) -I $(BUILD_DIR)/*.o -lboost_unit_test_framework  -o $(OUTPUT_DIR)/$(TEST_TARGET)
 
 # Cleans all object files
 .PHONY: all clean

@@ -67,8 +67,6 @@ namespace ExactArithmetic
 
       void normalise();
 
-      void removeLeadingZeros();
-
       // The integer is represented as a list of digits.
       std::list<Digit> digits {};
   };

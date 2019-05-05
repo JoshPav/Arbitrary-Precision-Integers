@@ -127,53 +127,6 @@ namespace ExactArithmetic{
         }
     } 
 
-    // ================================
-    //       Arithmetic Operators
-    // ================================
-
-    Integer Integer::operator-(const Integer & I) const{
-        if(digits.size() < I.digits.size()){
-            throw NegativeNumberError();
-        }
-        else{
-            Integer temp1(toString());
-
-            auto it1 = temp1.digits.end();
-            auto it2 = I.digits.end();
-
-            do{
-                it1--;
-                it2--;
-                *it1 = *it1 - *it2;
-            }while(it2 != I.digits.begin());
-
-            temp1.normalise();
-            return temp1;
-        }
-    }
-
-    // ================================
-    //       Compound Operators
-    // ================================
-
-    Integer & Integer::operator-=(const Integer & I){
-        if(digits.size() < I.digits.size()){
-            throw NegativeNumberError();
-        }
-        else{
-            auto it1 = digits.end();
-            auto it2 = I.digits.end();
-
-            do{
-                it1--;
-                it2--;
-                *it1 = *it1 - *it2;
-            }while(it2 != I.digits.begin());
-
-            normalise();
-            return *this;
-        }
-    }
 
     // ================================
     //       Private Functions
@@ -206,7 +159,7 @@ namespace ExactArithmetic{
         auto D = --digits.end();
         while(D!= digits.begin()){
             if(*D > 9){
-                *D = *D % 10;
+                *D = 0;
                 if(D == digits.begin()){
                     digits.push_front(1);
                     return;
@@ -215,14 +168,13 @@ namespace ExactArithmetic{
                     (*--D)++;
             }
             else if(*D < 0){
-                *D = *D + 10;
+                *D = 9;
                 (*--D)--;
             }
             else
                 --D;
-        }        
-        while(*D == 0 && D != --digits.end()){
-                digits.erase(D++);
         }
+        if(*D == 0)
+            digits.erase(D);
     }
 }
