@@ -17,7 +17,6 @@ namespace ExactArithmetic{
     }
 
     Integer::Integer(const std::string &S){
-        // Check if first symbol is valid
         for(auto cit = S.begin(); cit != S.end(); cit++){
             if(48 <= *cit && *cit<= 57){
                 if(*cit == 48){
@@ -90,11 +89,19 @@ namespace ExactArithmetic{
         return os;
     }
 
+    std::istream & operator>>(std::istream & is, Integer & I){
+
+        std::string input;
+        is >> input;
+
+        I = Integer(input);
+        return is;
+    }
 
     std::string Integer::toString() const{
         // Loop through list appending digit to string
         std::string S = "";
-        for(short int I : digits){
+        for(Digit I : digits){
             S += std::to_string(I);
         }
         return S;
