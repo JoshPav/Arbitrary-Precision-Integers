@@ -19,6 +19,8 @@ TESTS = $(wildcard $(TEST_DIR)/*.cpp)
 OBJECTS = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
 TEST_OBJECTS = $(patsubst $(TEST_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(TESTS))
 
+TESTS_TO_RUN = ConstructorTests,ComparisonTests
+
 make_directories:
 	@ mkdir -p $(BUILD_DIR)
 	@ mkdir -p $(OUTPUT_DIR)
@@ -30,11 +32,11 @@ all: build run clean
 # Compile run and clean test
 RunTests: build_tests run_tests clean
 
-run: $(OUTPUT_DIR)/$(TARGET)
+run: build $(OUTPUT_DIR)/$(TARGET)
 	@ ./$(OUTPUT_DIR)/$(TARGET)
 
-run_tests: $(OUTPUT_DIR)/$(TEST_TARGET)
-	@ ./$(OUTPUT_DIR)/$(TEST_TARGET) 
+run_tests: build_tests $(OUTPUT_DIR)/$(TEST_TARGET)
+	@ ./$(OUTPUT_DIR)/$(TEST_TARGET) --run_test=$(TESTS_TO_RUN)
 	
 # Make object files
 $(OBJECTS): $(BUILD_DIR)/%.o : $(SOURCE_DIR)/%.cpp
@@ -51,6 +53,6 @@ build_tests: make_directories $(TEST_OBJECTS) $(OBJECTS)
 	@ $(CC) $(CFLAGS) $(TEST_OBJECTS) $(OBJECTS) -lboost_unit_test_framework  -o $(OUTPUT_DIR)/$(TEST_TARGET)
 
 # Cleans all object files
-.PHONY: clean
+.PHONY: all clean
 clean:
 	@ rm -rf $(BUILD_DIR) $(OUTPUT_DIR) .vscode/ipch
