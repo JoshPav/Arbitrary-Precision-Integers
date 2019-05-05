@@ -2,7 +2,7 @@
 #include "integer.h"
 
 using namespace ExactArithmetic;
-
+/*
 int main(){
 
   Integer myInt;
@@ -11,3 +11,4 @@ int main(){
 
   return 0;
 }
+*/

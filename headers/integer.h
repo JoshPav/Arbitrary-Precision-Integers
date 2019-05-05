@@ -57,9 +57,6 @@ namespace ExactArithmetic
       Integer operator--(int); // post-decrement
 
       std::string toString() const;
-      int compare(const Integer &) const;
-      void normalise();
-      Integer additionHelper(const Integer &, const Integer &) const;
 
       // Friend declarations
       friend std::ostream & operator<<(std::ostream &, const Integer &);
@@ -69,6 +66,8 @@ namespace ExactArithmetic
       using Digit = short int;
 
       int compare(const Integer &) const;
+
+      Integer additionHelper(const Integer &, const Integer &) const;
 
       void normalise();
 
