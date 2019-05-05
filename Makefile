@@ -1,34 +1,59 @@
 CC=g++
-CFLAGS = -std=c++17 -Wall -g -I $(HEADER_DIR)
+CFLAGS = -std=c++17 -g -Wall -I $(HEADER_DIR)
 
+# Directories
 SOURCE_DIR = src
 HEADER_DIR = headers
 BUILD_DIR = obj
 OUTPUT_DIR = bin
-
+TEST_DIR = tests
+# Targets for output
 TARGET = Output.exe
-OBJECTS = $(addprefix $(BUILD_DIR)/, main.o)
+TEST_TARGET = Test.exe
 
+# Source files
+SOURCES = $(wildcard $(SOURCE_DIR)/*.cpp)
+TESTS = $(wildcard $(TEST_DIR)/*.cpp)
+
+# Objects
+OBJECTS = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
+TEST_OBJECTS = $(patsubst $(TEST_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(TESTS))
+
+tests = ConstructorTests,ComparisonTests,IncrementTests
+log_lvl = error
 
 make_directories:
-	mkdir -p $(BUILD_DIR)
-	mkdir -p $(OUTPUT_DIR)
+	@ mkdir -p $(BUILD_DIR)
+	@ mkdir -p $(OUTPUT_DIR)
 
+
+# Compile all files
 all: build run clean
+
+# Compile run and clean test
+RunTests: build_tests run_tests clean
+
+run: build $(OUTPUT_DIR)/$(TARGET)
+	@ ./$(OUTPUT_DIR)/$(TARGET)
+
+run_tests: build_tests $(OUTPUT_DIR)/$(TEST_TARGET)
+	@ ./$(OUTPUT_DIR)/$(TEST_TARGET) --log_level=$(log_lvl) --run_test=$(tests) 
 	
-run: $(OUTPUT_DIR)/$(TARGET)
-	./$(OUTPUT_DIR)/$(TARGET)
+# Make object files
+$(OBJECTS): $(BUILD_DIR)/%.o : $(SOURCE_DIR)/%.cpp
+	@ $(CC) $(CFLAGS) -c $< -o $@
 
-#Compile all Files
-build: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(OUTPUT_DIR)/$(TARGET) $(OBJECTS)
+# Make test files
+$(TEST_OBJECTS): $(BUILD_DIR)/%.o : $(TEST_DIR)/%.cpp
+	@ $(CC) $(CFLAGS) -c $< -o $@
 
-#Main object file
-$(BUILD_DIR)/main.o: make_directories $(SOURCE_DIR)/main.cpp
-	$(CC) $(CFLAGS) -c $(SOURCE_DIR)/main.cpp -o $@
+build: make_directories $(OBJECTS)
+	@ $(CC) $(CFLAGS) $(OBJECTS) -o $(OUTPUT_DIR)/$(TARGET)
 
-#Cleans all object files
+build_tests: make_directories $(TEST_OBJECTS) $(OBJECTS)
+	@ $(CC) $(CFLAGS) $(TEST_OBJECTS) $(OBJECTS) -lboost_unit_test_framework  -o $(OUTPUT_DIR)/$(TEST_TARGET)
+
+# Cleans all object files
+.PHONY: all clean
 clean:
-	rm -rf $(BUILD_DIR) $(OUTPUT_DIR)
-
-	
+	@ rm -rf $(BUILD_DIR) $(OUTPUT_DIR) .vscode/ipch

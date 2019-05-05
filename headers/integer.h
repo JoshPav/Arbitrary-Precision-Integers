@@ -63,6 +63,10 @@ namespace ExactArithmetic
     private:
       using Digit = short int;
 
+      int compare(const Integer &) const;
+
+      void normalise();
+
       // The integer is represented as a list of digits.
       std::list<Digit> digits {};
   };
