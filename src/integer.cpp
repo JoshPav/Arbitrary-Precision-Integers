@@ -1,5 +1,4 @@
 #include "integer.h"
-<<<<<<< HEAD
 
 
 //Constructors
@@ -224,7 +223,7 @@ namespace ExactArithmetic{
     // ================================
     //      Increment Operators
     // ================================
-    
+
 
     // ++ Pre-increment
     Integer & Integer::operator++(){
@@ -239,7 +238,7 @@ namespace ExactArithmetic{
         digits.back()++;
         normalise();
         return temp;
-    } 
+    }
     }
 
     // -- Pre-decrement
@@ -252,7 +251,7 @@ namespace ExactArithmetic{
             normalise();
             return *this;
         }
-    }  
+    }
     }
 
     // Post-decrement --
@@ -266,7 +265,7 @@ namespace ExactArithmetic{
             normalise();
             return temp;
         }
-    } 
+    }
     }
 
     // ================================
@@ -362,7 +361,7 @@ namespace ExactArithmetic{
             }
             else
                 --D;
-        }        
+        }
         }
         while(*D == 0 && D != --digits.end()){
                 digits.erase(D++);
