@@ -36,4 +36,43 @@ namespace ExactArithmetic{
 
     return numeric;
   }
+
+  std::ostream & operator<<(std::ostream & os, const Integer & i){
+      return os << i.toString();
+  }
+
+  bool Integer::operator<(const Integer & toCompare) const{
+    return compare(toCompare) < 0;
+  }
+  bool Integer::operator>(const Integer & toCompare) const{
+    return compare(toCompare) > 0;
+  }
+  bool Integer::operator<=(const Integer & toCompare) const{
+    int i = compare(toCompare);
+    return i < 0 || i == 0;
+  }
+  bool Integer::operator>=(const Integer & toCompare) const{
+    int i = compare(toCompare);
+    return i > 0 || i == 0;
+  }
+  bool Integer::operator==(const Integer & toCompare) const{
+    return compare(toCompare) == 0;
+  }
+  bool Integer::operator!=(const Integer & toCompare) const{
+    int i = compare(toCompare);
+    return i > 0 || i < 0;
+  }
+
+  int Integer::compare(const Integer & toCompare) const{
+    if(digits.size() < toCompare.digits.size()){
+      return -1;
+    }
+    else if(digits.size() > toCompare.digits.size()){
+      return 1;
+    }
+    else{
+        auto testPair = std::mismatch(digits.begin(), digits.end(), toCompare.digits.begin());
+        return *(testPair).first - *(testPair).second;
+    }
+  }
 }

@@ -56,7 +56,7 @@ namespace ExactArithmetic
       Integer operator--(int); // post-decrement
 
       std::string toString() const;
-
+      int compare(const Integer &) const;
       // Friend declarations
       friend std::ostream & operator<<(std::ostream &, const Integer &);
       friend std::istream & operator>>(std::istream &, Integer &);
