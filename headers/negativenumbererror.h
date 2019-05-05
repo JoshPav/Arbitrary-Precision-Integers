@@ -5,11 +5,11 @@
 
 namespace ExactArithmetic
 {
-  class NegativeNumberError : public std::domain_error
-  {
+    class NegativeNumberError : public std::domain_error
+    {
     public:
-      NegativeNumberError() : std::domain_error("Less than Zero") {}
-  };
-}
+        NegativeNumberError() : std::domain_error("Less than Zero") {}
+    };
+} // namespace ExactArithmetic
 
 #endif

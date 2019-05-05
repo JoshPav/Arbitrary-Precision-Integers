@@ -1,10 +1,10 @@
 #include "integer.h"
-
+#include "negativenumbererror.h"
 namespace ExactArithmetic{
 
-// ================================
-//          Constructors
-// ================================
+    // ================================
+    //          Constructors
+    // ================================
 
     Integer::Integer(){
         digits.push_back(0);
@@ -66,22 +66,8 @@ namespace ExactArithmetic{
         return compare(other) >= 0;
     };
 
-    int Integer::compare(const Integer & other) const{
-        if(digits.size() < other.digits.size()){
-            return -1;
-        }
-        else if(digits.size() > other.digits.size()){
-            return 1;
-        }
-        else{
-            auto Pair = std::mismatch(digits.begin(),digits.end(),
-                                other.digits.begin(),other.digits.end());
-            return *Pair.first - *Pair.second;
-        }
-    }
-
     // ================================
-    //      Friend Declarations
+    //      Stream Overloads
     // ================================
 
     std::ostream & operator<<(std::ostream & os, const Integer & I){
@@ -97,6 +83,64 @@ namespace ExactArithmetic{
         I = Integer(input);
         return is;
     }
+    // ================================
+    //      Increment Operators
+    // ================================
+    
+    // ++ Pre-increment
+    Integer & Integer::operator++(){
+        ++digits.back();
+        
+        normalise();
+
+        return *this;
+    }
+
+    // Post-increment ++
+    Integer Integer::operator++(int){
+
+        Integer temp(toString());
+
+        digits.back()++;
+        normalise();
+
+        return temp;
+    } 
+
+    // -- Pre-decrement
+    Integer & Integer::operator--(){
+        if(digits.size() == 1 && digits.back() == 0){
+            throw NegativeNumberError();
+        }
+        else{
+            --digits.back();
+
+            normalise();
+
+            return *this;
+        }
+    }  
+
+    // Post-decrement --
+    Integer Integer::operator--(int){
+        if(digits.size() == 1 && digits.back() == 0){
+            throw NegativeNumberError();
+        }
+        else{
+            Integer temp(toString());
+
+            digits.back()--;
+
+            normalise();
+
+            return temp;
+        }
+    } 
+
+
+    // ================================
+    //       Private Functions
+    // ================================
 
     std::string Integer::toString() const{
         // Loop through list appending digit to string
@@ -107,4 +151,43 @@ namespace ExactArithmetic{
         return S;
     }
 
+    int Integer::compare(const Integer & other) const{
+        if(digits.size() < other.digits.size()){
+            return -1;
+        }
+        else if(digits.size() > other.digits.size()){
+            return 1;
+        }
+        else{
+            auto Pair = std::mismatch(digits.begin(),digits.end(),
+                                other.digits.begin(),other.digits.end());
+            return *Pair.first - *Pair.second;
+        }
+    }
+
+    void Integer::normalise() {
+
+        auto D = --digits.end();
+        while(D!= digits.begin()){
+            if(*D > 9){
+                *D = 0;
+                if(D == digits.begin()){
+                    digits.push_front(1);
+                    return;
+                }
+                else{
+                    (*--D)++;
+                }
+            }
+            else if(*D < 0){
+                *D = 9;
+                (*--D)--;
+            }
+            else
+                --D;
+        }
+        if(*D == 0){
+            digits.erase(D);
+        }
+    }
 }

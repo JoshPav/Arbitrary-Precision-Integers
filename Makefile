@@ -19,7 +19,8 @@ TESTS = $(wildcard $(TEST_DIR)/*.cpp)
 OBJECTS = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
 TEST_OBJECTS = $(patsubst $(TEST_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(TESTS))
 
-TESTS_TO_RUN = ConstructorTests,ComparisonTests
+tests = ConstructorTests,ComparisonTests,IncrementTests
+log_lvl = error
 
 make_directories:
 	@ mkdir -p $(BUILD_DIR)
@@ -36,7 +37,7 @@ run: build $(OUTPUT_DIR)/$(TARGET)
 	@ ./$(OUTPUT_DIR)/$(TARGET)
 
 run_tests: build_tests $(OUTPUT_DIR)/$(TEST_TARGET)
-	@ ./$(OUTPUT_DIR)/$(TEST_TARGET) --run_test=$(TESTS_TO_RUN)
+	@ ./$(OUTPUT_DIR)/$(TEST_TARGET) --log_level=$(log_lvl) --run_test=$(tests) 
 	
 # Make object files
 $(OBJECTS): $(BUILD_DIR)/%.o : $(SOURCE_DIR)/%.cpp

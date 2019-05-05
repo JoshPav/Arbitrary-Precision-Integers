@@ -65,6 +65,8 @@ namespace ExactArithmetic
 
       int compare(const Integer &) const;
 
+      void normalise();
+
       // The integer is represented as a list of digits.
       std::list<Digit> digits {};
   };
