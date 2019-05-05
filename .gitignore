@@ -1,4 +1,5 @@
 *.o
 *.h.gch
-
-integerConstuctor
+compTests
+constTests
+arithmeticTests
