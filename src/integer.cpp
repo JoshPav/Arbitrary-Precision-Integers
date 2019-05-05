@@ -161,18 +161,14 @@ namespace ExactArithmetic{
         else{
             Integer Temp(toString());
             Integer Count;
-            while(Temp >= 0){
+            while(Temp >= Integer(0)){
                 try
                 { 
                     Temp -= I;
-                    Count++;
+                    if(Temp >= Integer(0))
+                        Count++;
                 }
                 catch(ExactArithmetic::NegativeNumberError)
-                {
-                    Count.normalise();
-                    return Count;
-                }
-                catch(std::invalid_argument)
                 {
                     Count.normalise();
                     return Count;
@@ -243,10 +239,13 @@ namespace ExactArithmetic{
 
         auto D = --digits.end();
         do{
+            if(*D > 20){
+                std::cout << "Help" << std::endl;
+            }
             if(*D > 9){
                 *D = *D % 10;
                 if(D == digits.begin()){
-                    digits.push_front(floor(*D / 10));
+                    digits.push_front(1);
                     return;
                 }
                 else
