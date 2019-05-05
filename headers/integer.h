@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 #include <stdexcept>
+#include "dividebyzeroerror.h"
+#include "negativenumbererror.h"
 
 namespace ExactArithmetic
 {
@@ -57,6 +59,8 @@ namespace ExactArithmetic
 
       std::string toString() const;
       int compare(const Integer &) const;
+      void normalise();
+      
       // Friend declarations
       friend std::ostream & operator<<(std::ostream &, const Integer &);
       friend std::istream & operator>>(std::istream &, Integer &);

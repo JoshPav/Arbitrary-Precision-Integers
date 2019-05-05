@@ -3,7 +3,7 @@
 
 INCLUDEDIR = ../headers/
 CXXFLAGS   = -std=c++11 -I $(INCLUDEDIR) -Wall -Wfatal-errors
-EXECUTABLES = constTests compTests
+EXECUTABLES = constTests compTests arithmeticTests
 
 vpath %.h $(INCLUDEDIR)
 
