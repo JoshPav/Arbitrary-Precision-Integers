@@ -90,20 +90,15 @@ namespace ExactArithmetic{
     // ++ Pre-increment
     Integer & Integer::operator++(){
         ++digits.back();
-        
         normalise();
-
         return *this;
     }
 
     // Post-increment ++
     Integer Integer::operator++(int){
-
         Integer temp(toString());
-
         digits.back()++;
         normalise();
-
         return temp;
     } 
 
@@ -114,9 +109,7 @@ namespace ExactArithmetic{
         }
         else{
             --digits.back();
-
             normalise();
-
             return *this;
         }
     }  
@@ -128,11 +121,8 @@ namespace ExactArithmetic{
         }
         else{
             Integer temp(toString());
-
             digits.back()--;
-
             normalise();
-
             return temp;
         }
     } 
@@ -143,7 +133,6 @@ namespace ExactArithmetic{
     // ================================
 
     std::string Integer::toString() const{
-        // Loop through list appending digit to string
         std::string S = "";
         for(Digit I : digits){
             S += std::to_string(I);
@@ -175,9 +164,8 @@ namespace ExactArithmetic{
                     digits.push_front(1);
                     return;
                 }
-                else{
+                else
                     (*--D)++;
-                }
             }
             else if(*D < 0){
                 *D = 9;
@@ -186,8 +174,7 @@ namespace ExactArithmetic{
             else
                 --D;
         }
-        if(*D == 0){
+        if(*D == 0)
             digits.erase(D);
-        }
     }
 }
