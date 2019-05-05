@@ -225,6 +225,7 @@ namespace ExactArithmetic{
     //      Increment Operators
     // ================================
     
+
     // ++ Pre-increment
     Integer & Integer::operator++(){
         ++digits.back();
@@ -239,6 +240,7 @@ namespace ExactArithmetic{
         normalise();
         return temp;
     } 
+    }
 
     // -- Pre-decrement
     Integer & Integer::operator--(){
@@ -251,6 +253,7 @@ namespace ExactArithmetic{
             return *this;
         }
     }  
+    }
 
     // Post-decrement --
     Integer Integer::operator--(int){
@@ -264,6 +267,7 @@ namespace ExactArithmetic{
             return temp;
         }
     } 
+    }
 
     // ================================
     //       Arithmetic Operators
@@ -359,6 +363,7 @@ namespace ExactArithmetic{
             else
                 --D;
         }        
+        }
         while(*D == 0 && D != --digits.end()){
                 digits.erase(D++);
         }
