@@ -1,5 +1,7 @@
 #include "integer.h"
 #include "negativenumbererror.h"
+#include "dividebyzeroerror.h"
+#include <math.h>
 namespace ExactArithmetic{
 
     // ================================
@@ -152,6 +154,35 @@ namespace ExactArithmetic{
         }
     }
 
+    Integer Integer::operator/(const Integer & I) const{
+        if(I == Integer(0)){
+            throw DivideByZeroError();
+        }
+        else{
+            Integer Temp(toString());
+            Integer Count;
+            while(Temp >= 0){
+                try
+                { 
+                    Temp -= I;
+                    Count++;
+                }
+                catch(ExactArithmetic::NegativeNumberError)
+                {
+                    Count.normalise();
+                    return Count;
+                }
+                catch(std::invalid_argument)
+                {
+                    Count.normalise();
+                    return Count;
+                }
+            }
+        return Count;
+        }
+    } // Throws a DivideByZeroError for a 0 divisor.
+
+
     // ================================
     //       Compound Operators
     // ================================
@@ -201,14 +232,21 @@ namespace ExactArithmetic{
         }
     }
 
+    void Integer::removeLeadingZeros(){
+        auto D = digits.begin();
+        while(*D == 0 && D != --digits.end()){
+                digits.erase(D++);
+        }
+    }
+
     void Integer::normalise() {
 
         auto D = --digits.end();
-        while(D!= digits.begin()){
+        do{
             if(*D > 9){
                 *D = *D % 10;
                 if(D == digits.begin()){
-                    digits.push_front(1);
+                    digits.push_front(floor(*D / 10));
                     return;
                 }
                 else
@@ -220,9 +258,8 @@ namespace ExactArithmetic{
             }
             else
                 --D;
-        }        
-        while(*D == 0 && D != --digits.end()){
-                digits.erase(D++);
-        }
+        }while(D!= digits.begin());
+
+        removeLeadingZeros();
     }
 }

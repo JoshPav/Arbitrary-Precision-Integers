@@ -2,15 +2,11 @@
 #include <boost/test/unit_test.hpp>
 #include "integer.h"
 #include "negativenumbererror.h"
+#include "dividebyzeroerror.h"
 
 BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
-<<<<<<< HEAD
         
     BOOST_AUTO_TEST_SUITE ( SubtractionTests )
-=======
-
-    BOOST_AUTO_TEST_SUITE ( SubtractionTests)
->>>>>>> subtraction
 
         BOOST_AUTO_TEST_CASE ( SubLongShort )
         {
@@ -18,10 +14,6 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
             ExactArithmetic::Integer B("5000088880");
 
             ExactArithmetic::Integer C = A-B;
-<<<<<<< HEAD
-=======
-
->>>>>>> subtraction
             BOOST_CHECK_EQUAL(C,ExactArithmetic::Integer("9134861215410000000000"));
         }
 
@@ -140,6 +132,61 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
     BOOST_AUTO_TEST_SUITE_END()
     
     BOOST_AUTO_TEST_SUITE ( DivisionTests )
+
+        BOOST_AUTO_TEST_CASE ( DivideByZero ){
+            ExactArithmetic::Integer A("3649827349");
+            ExactArithmetic::Integer B("0");
+
+            BOOST_CHECK_THROW( A/B , ExactArithmetic::DivideByZeroError);
+        }
+
+        BOOST_AUTO_TEST_CASE ( WholeDivideSmall)
+        {
+            ExactArithmetic::Integer A("450");
+            ExactArithmetic::Integer B("25");
+
+            ExactArithmetic::Integer C = A/B;
+
+            BOOST_CHECK_EQUAL( C , ExactArithmetic::Integer("18"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( WholeDivideLarge)
+        {
+            ExactArithmetic::Integer A("286549000000");
+            ExactArithmetic::Integer B("100");
+            ExactArithmetic::Integer C = A/B;
+
+            BOOST_CHECK_EQUAL( C , ExactArithmetic::Integer(2865490000));
+        }
+
+        BOOST_AUTO_TEST_CASE ( NotDivisible )
+        {
+            ExactArithmetic::Integer A("32");
+            ExactArithmetic::Integer B("150");
+            ExactArithmetic::Integer C = A/B;
+
+            BOOST_CHECK_EQUAL( C , ExactArithmetic::Integer());
+        }
+
+        BOOST_AUTO_TEST_CASE ( RemainderDivideSmall )
+        {
+            ExactArithmetic::Integer A("50");
+            ExactArithmetic::Integer B("3");
+            ExactArithmetic::Integer C = A/B;
+
+            BOOST_CHECK_EQUAL( C , ExactArithmetic::Integer(16));
+        }
+
+        BOOST_AUTO_TEST_CASE ( RemainderDivideLarge )
+        {
+            ExactArithmetic::Integer A("2999999999999999");
+            ExactArithmetic::Integer B("3");
+
+            ExactArithmetic::Integer C = A/B;
+
+            BOOST_CHECK_EQUAL( C , ExactArithmetic::Integer("999999999999999"));
+        }
+
     BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE_END()
