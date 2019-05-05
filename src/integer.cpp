@@ -79,13 +79,13 @@ namespace ExactArithmetic{
   void Integer::normalise(){
     int carryBit = 0;
     for(auto itr = digits.end(); itr != digits.begin(); itr--){
-      *itr += carryBit
+      *itr += carryBit;
       if(*itr < 0){
-        *itr += 10
+        *itr += 10;
         carryBit = -1;
       }
       else if(*itr > 9){
-        *itr -= 10
+        *itr -= 10;
         carryBit = 1;
       }
       else{
@@ -94,7 +94,7 @@ namespace ExactArithmetic{
     }
     if(carryBit == -1){
       //if theres still a negative carry bit at the end throw error as resulting number is less than 0
-      throw NegativeNumberError;
+      throw NegativeNumberError();
     }
 
     //remove leading zeros
