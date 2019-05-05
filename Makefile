@@ -18,6 +18,7 @@ TESTS = $(wildcard $(TEST_DIR)/*.cpp)
 # Objects
 OBJECTS = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
 TEST_OBJECTS = $(patsubst $(TEST_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(TESTS))
+#TEST_OBJECTS := $(filter-out $(TEST_DIR)/ArithmeticTests.cpp, $(TEST_OBJECTS))
 
 tests = ConstructorTests,ComparisonTests,IncrementTests,ArithmeticTests
 log_lvl = error

@@ -4,8 +4,13 @@
 #include "negativenumbererror.h"
 
 BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
+<<<<<<< HEAD
         
     BOOST_AUTO_TEST_SUITE ( SubtractionTests )
+=======
+
+    BOOST_AUTO_TEST_SUITE ( SubtractionTests)
+>>>>>>> subtraction
 
         BOOST_AUTO_TEST_CASE ( SubLongShort )
         {
@@ -13,6 +18,10 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
             ExactArithmetic::Integer B("5000088880");
 
             ExactArithmetic::Integer C = A-B;
+<<<<<<< HEAD
+=======
+
+>>>>>>> subtraction
             BOOST_CHECK_EQUAL(C,ExactArithmetic::Integer("9134861215410000000000"));
         }
 
@@ -123,4 +132,14 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
         }
 
     BOOST_AUTO_TEST_SUITE_END()
+
+    BOOST_AUTO_TEST_SUITE ( AdditionTests )
+    BOOST_AUTO_TEST_SUITE_END()
+
+    BOOST_AUTO_TEST_SUITE ( MultiplicationTests )
+    BOOST_AUTO_TEST_SUITE_END()
+    
+    BOOST_AUTO_TEST_SUITE ( DivisionTests )
+    BOOST_AUTO_TEST_SUITE_END()
+
 BOOST_AUTO_TEST_SUITE_END()
