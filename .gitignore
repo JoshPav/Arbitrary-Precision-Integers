@@ -3,3 +3,7 @@
 compTests
 constTests
 arithmeticTests
+main.cpp
+.vscode/ipch/
+bin/
+obj/
