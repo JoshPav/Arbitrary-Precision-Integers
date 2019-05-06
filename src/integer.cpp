@@ -241,25 +241,7 @@ namespace ExactArithmetic{
            return *this = (I * *this);
        }
     }
-    /*
-    Integer & Integer::operator*=(const Integer & I){
-        if(I == Integer()){
-            return (*this = Integer());
-        }
-        else if(I.digits.size() > digits.size())
-        {
-            return *this = (I*(*this));
-        }
-        else{
-            Integer Temp(*this);
-            for(Integer A("1");A < I;++A){
-                *this += Temp;
-                normalise();
-            }
-        }
-        return *this;
-    }
-*/
+
     Integer & Integer::operator/=(const Integer & I){
         if(I == Integer(0)){
             throw DivideByZeroError();
