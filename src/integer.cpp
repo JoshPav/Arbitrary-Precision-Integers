@@ -136,67 +136,18 @@ namespace ExactArithmetic{
     // ================================
 
     Integer Integer::operator-(const Integer & I) const{
-        if(digits.size() < I.digits.size()){
-            throw NegativeNumberError();
-        }
-        else{
-            Integer temp(toString());
-
-            auto it1 = temp.digits.end();
-            auto it2 = I.digits.end();
-
-            do{
-                it1--;
-                it2--;
-                *it1 -= *it2;
-            }while(it2 != I.digits.begin());
-
-            temp.normalise();
-            return temp;
-        }
+        Integer temp(toString());
+        return temp -= I;
     }
 
     Integer Integer::operator+(const Integer & I) const{
-        if(digits.size() >= I.digits.size()){
-            Integer temp(toString());
-
-            auto it1 = temp.digits.end();
-            auto it2 = I.digits.end();
-
-            do{
-                it1--;
-                it2--;
-                *it1 += *it2;
-            }while(it2 != I.digits.begin());
-            temp.normalise();
-            return temp;
-        }
-        else
-            return I + *this;
+        Integer temp(toString());
+        return temp += I;
     }
 
     Integer Integer::operator/(const Integer & I) const{
-        if(I == Integer(0)){
-            throw DivideByZeroError();
-        }
-        else{
-            Integer Temp(toString());
-            Integer Count;
-            while(Temp >= Integer(0)){
-                try
-                { 
-                    Temp -= I;
-                    if(Temp >= Integer(0))
-                        Count++;
-                }
-                catch(ExactArithmetic::NegativeNumberError)
-                {
-                    Count.normalise();
-                    return Count;
-                }
-            }
-        return Count;
-        }
+        Integer temp(toString());
+        return temp/=I;
     } // Throws a DivideByZeroError for a 0 divisor.
 
 
