@@ -158,6 +158,10 @@ namespace ExactArithmetic{
         return Integer(*this)/=I;
     } 
 
+    Integer Integer::operator%(const Integer & I) const{
+        return Integer(*this)%=I;
+    } 
+
     // ================================
     //       Compound Operators
     // ================================
@@ -235,12 +239,35 @@ namespace ExactArithmetic{
                 catch(ExactArithmetic::NegativeNumberError)
                 {
                     Count.normalise();
-                    *this = Count;
-                    return *this;
+                    return *this = Count;
                 }
             }
-        *this = Count;
-        return *this;
+        return *this = Count;
+        }
+    }
+
+    Integer & Integer::operator%=(const Integer & I){
+        if(I == Integer()){
+            throw ExactArithmetic::DivideByZeroError();
+        }
+        else if(I >= *this || I == Integer("1")){
+            return *this = Integer();
+        }
+        else{
+            Integer Temp(*this);
+            Integer Count;
+            while(Temp >= I){
+                try
+                { 
+                    Temp -= I;
+                }
+                catch(ExactArithmetic::NegativeNumberError)
+                {
+                    Temp.normalise();
+                    return *this = Temp;
+                }
+            }
+        return *this = Temp;
         }
     }
 

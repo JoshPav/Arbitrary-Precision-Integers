@@ -266,4 +266,60 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
         
     BOOST_AUTO_TEST_SUITE_END()
 
+    BOOST_AUTO_TEST_SUITE ( ModuloTests )
+
+        BOOST_AUTO_TEST_CASE ( ModuloZero ){
+            ExactArithmetic::Integer A("3649827349");
+            ExactArithmetic::Integer B("0");
+
+            BOOST_CHECK_THROW( A%B , ExactArithmetic::DivideByZeroError);
+        }
+
+        BOOST_AUTO_TEST_CASE ( ModuloOne ){
+            ExactArithmetic::Integer A("56050151");
+            ExactArithmetic::Integer B("1");
+
+            ExactArithmetic::Integer C = A%B;
+
+            BOOST_CHECK_EQUAL( C , Integer("0"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( ModuloOdd ){
+            ExactArithmetic::Integer A("12237");
+            ExactArithmetic::Integer B("2");
+
+            ExactArithmetic::Integer C = A%B;
+
+            BOOST_CHECK_EQUAL( C , Integer("1"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( ModuloEven ){
+            ExactArithmetic::Integer A("45600");
+            ExactArithmetic::Integer B("2");
+
+            ExactArithmetic::Integer C = A%B;
+
+            BOOST_CHECK_EQUAL( C , Integer("0"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( RemainerOne ){
+            ExactArithmetic::Integer A("45600");
+            ExactArithmetic::Integer B("45599");
+
+            ExactArithmetic::Integer C = A%B;
+
+            BOOST_CHECK_EQUAL( C , Integer("1"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( BiggerNumber ){
+            ExactArithmetic::Integer A("3423");
+            ExactArithmetic::Integer B("4000");
+
+            ExactArithmetic::Integer C = A%B;
+
+            BOOST_CHECK_EQUAL( C , Integer("0"));
+        }
+
+    BOOST_AUTO_TEST_SUITE_END()
+
 BOOST_AUTO_TEST_SUITE_END()

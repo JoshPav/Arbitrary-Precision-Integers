@@ -7,10 +7,10 @@ int main(){
 
   std::cout << ExactArithmetic::Integer("1000");
 
-    ExactArithmetic::Integer A("2999999999999999");
-    ExactArithmetic::Integer B("300000000");
+  ExactArithmetic::Integer A("400");
+  ExactArithmetic::Integer B("5");
 
-  ExactArithmetic::Integer C = A/B;
+  ExactArithmetic::Integer C = A%B;
 
   std::cout << "A: " << A << std::endl;
   std::cout << "B: " << B << std::endl;

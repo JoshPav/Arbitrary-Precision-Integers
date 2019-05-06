@@ -264,4 +264,60 @@ BOOST_AUTO_TEST_SUITE ( CompoundOperatorTests )
 
     BOOST_AUTO_TEST_SUITE_END ()
 
+    BOOST_AUTO_TEST_SUITE ( ModuloTests )
+
+        BOOST_AUTO_TEST_CASE ( ModuloZero ){
+            Integer A("3649827349");
+            Integer B("0");
+
+            BOOST_CHECK_THROW( A%=B , DivideByZeroError);
+        }
+
+        BOOST_AUTO_TEST_CASE ( ModuloOne ){
+            Integer A("56050151");
+            Integer B("1");
+
+            A%=B;
+
+            BOOST_CHECK_EQUAL( A , Integer("0"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( ModuloOdd ){
+            Integer A("12237");
+            Integer B("2");
+
+            A%=B;
+
+            BOOST_CHECK_EQUAL( A, Integer("1"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( ModuloEven ){
+            Integer A("45600");
+            Integer B("2");
+
+            A%=B;
+
+            BOOST_CHECK_EQUAL( A , Integer("0"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( RemainerOne ){
+            Integer A("45600");
+            Integer B("45599");
+
+            A%=B;
+
+            BOOST_CHECK_EQUAL( A , Integer("1"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( BiggerNumber ){
+            Integer A("3423");
+            Integer B("4000");
+
+            A%=B;
+
+            BOOST_CHECK_EQUAL( A , Integer("0"));
+        }
+
+    BOOST_AUTO_TEST_SUITE_END()
+
 BOOST_AUTO_TEST_SUITE_END()
