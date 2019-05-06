@@ -205,6 +205,44 @@ namespace ExactArithmetic{
     }
 
     Integer & Integer::operator*=(const Integer & I){
+        // Algorithm found at: https://silentmatt.com/blog/2011/10/how-bigintegers-work-part-2-multiplication/
+
+       if(I.digits.size() <= digits.size()){
+
+            auto bottomItr = I.digits.end();
+            std::list<Integer> intToAdd;
+            Integer Count, Total;
+
+            do{
+                --bottomItr;
+
+               Integer temp(*this);
+
+               //appending zeros to simulate long multiplication
+               for(Integer countI; countI < Count; countI++)
+                {
+                   temp.digits.push_back(0);
+                }
+
+               for(auto topItr= temp.digits.end(); topItr != temp.digits.begin();){
+                   --topItr;
+                    *topItr = *topItr * *bottomItr;
+                }
+
+                Count++;
+                temp.normalise();
+                Total += temp;
+
+            }while(bottomItr != I.digits.begin());
+            
+            return *this= Total;
+        }
+        else{
+           return *this = (I * *this);
+       }
+    }
+    /*
+    Integer & Integer::operator*=(const Integer & I){
         if(I == Integer()){
             return (*this = Integer());
         }
@@ -221,7 +259,7 @@ namespace ExactArithmetic{
         }
         return *this;
     }
-
+*/
     Integer & Integer::operator/=(const Integer & I){
         if(I == Integer(0)){
             throw DivideByZeroError();
@@ -309,14 +347,16 @@ namespace ExactArithmetic{
         {
             --D;
             if((*D) > 9){
+                Digit toPush = floor(*D/10);
                 *D %= 10;
+
                 if(D == digits.begin()){
-                    digits.push_front(1);
+                    digits.push_front(toPush);
                     return;
                 }
                 else{
                     auto Dcopy = D;
-                    (*--Dcopy)++;
+                    (*--Dcopy)+= toPush;
                 }
             }
             else if(*D < 0){

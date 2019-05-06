@@ -128,80 +128,155 @@ BOOST_AUTO_TEST_SUITE ( CompoundOperatorTests )
 
     BOOST_AUTO_TEST_SUITE_END ()
 
-    BOOST_AUTO_TEST_SUITE ( MultiplicationTests )
+    BOOST_AUTO_TEST_SUITE(MultiplicationTests)
 
-        BOOST_AUTO_TEST_CASE ( TimesZero )
+        BOOST_AUTO_TEST_CASE ( ZeroTimesZero )
         {
-            Integer A("2651561");
-            Integer B;
+            Integer A("0");
+            Integer B("0");
 
             A*=B;
 
-            BOOST_CHECK_EQUAL(A,Integer());
-
+            BOOST_CHECK_EQUAL ( A , Integer("0") );
         }
 
-        BOOST_AUTO_TEST_CASE ( TimesOne )
+        BOOST_AUTO_TEST_CASE ( ZeroTimesA )
         {
-            Integer A("2651561");
-            Integer B("1");
+            Integer A("2423423428");
+            Integer B("0");
 
             A*=B;
 
-            BOOST_CHECK_EQUAL(A,A);
-
+            BOOST_CHECK_EQUAL ( A , Integer("0") );
         }
 
-        BOOST_AUTO_TEST_CASE ( Square )
+        BOOST_AUTO_TEST_CASE ( OneDigitLessThan10 )
         {
-            Integer A("156156");
-            Integer B("156156");
+            Integer A("3");
+            Integer B("2");
 
             A*=B;
 
-            BOOST_CHECK_EQUAL(A,Integer("24384696336"));
+            BOOST_CHECK_EQUAL ( A , Integer("6") );
+        }
 
+        BOOST_AUTO_TEST_CASE ( OneOverflowTest )
+        {
+            Integer A("2");
+            Integer B("5");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL ( A , Integer("10") );
+        }
+
+        BOOST_AUTO_TEST_CASE ( TwoDigitOneDigit )
+        {
+            Integer A("11");
+            Integer B("6");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL ( A , Integer("66") );
+        }
+
+        BOOST_AUTO_TEST_CASE ( TwoDigitTwoDigit )
+        {
+            Integer A("11");
+            Integer B("12");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL ( A , Integer("132") );
+        }
+
+        BOOST_AUTO_TEST_CASE ( ThreeDigitOneDigit )
+        {
+            Integer A("104");
+            Integer B("2");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL ( A , Integer("208") );
+        }
+
+        BOOST_AUTO_TEST_CASE ( ThreeDigitThreeDigit )
+        {
+            Integer A("101");
+            Integer B("301");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL ( A , Integer("30401") );
+        }
+
+        BOOST_AUTO_TEST_CASE ( LotsOfZeros )
+        {
+            Integer A("10000000000000000");
+            Integer B("90000000000990000");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL ( A , Integer("900000000009900000000000000000000") );
         }
 
         BOOST_AUTO_TEST_CASE ( LotsOfCarry )
         {
-            Integer A("99999999999");
+            Integer A("9999999");
             Integer B("3");
 
             A*=B;
 
-            BOOST_CHECK_EQUAL(A,Integer("299999999997"));
-
+            BOOST_CHECK_EQUAL ( A , Integer("29999997") );
         }
 
-        BOOST_AUTO_TEST_CASE ( TwoSmall )
+        BOOST_AUTO_TEST_CASE ( TwoBigNumbers )
         {
-            Integer A("190");
-            Integer B("200");
+            Integer A("99999999");
+            Integer B("20000002");
 
             A*=B;
 
-            BOOST_CHECK_EQUAL(A,Integer("38000"));
+            BOOST_CHECK_EQUAL ( A , Integer("2000000179999998") );
         }
 
-        BOOST_AUTO_TEST_CASE ( SmallLarge )
+        BOOST_AUTO_TEST_CASE ( DataTypeLimitTest )
         {
-            Integer A("10");
-            Integer B("6156163156165");
+            Integer A("18446744073709551616");
+            Integer B("1");
 
             A*=B;
 
-            BOOST_CHECK_EQUAL(A,Integer("61561631561650"));
+            BOOST_CHECK_EQUAL ( A , Integer("18446744073709551616") );
         }
 
-        BOOST_AUTO_TEST_CASE ( LargeSmall )
+        BOOST_AUTO_TEST_CASE ( VeryBig )
         {
-            Integer A("6156163156165");
-            Integer B("10");
+            Integer A("8000000000000000");
+            Integer B("5000000000000000");
 
             A*=B;
 
-            BOOST_CHECK_EQUAL(A,Integer("61561631561650"));
+            BOOST_CHECK_EQUAL ( A , Integer("40000000000000000000000000000000") );
+        }
+
+        BOOST_AUTO_TEST_CASE ( BigCarryBits )
+        {
+            Integer A("298747");
+            Integer B("68791");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL ( A , Integer("20551104877") );
+        }
+        BOOST_AUTO_TEST_CASE ( SmallBig )
+        {
+            Integer A("67");
+            Integer B("17869");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL ( A , Integer("1197223") );
         }
 
     BOOST_AUTO_TEST_SUITE_END()
