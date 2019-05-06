@@ -2,6 +2,7 @@
 #include "negativenumbererror.h"
 #include "dividebyzeroerror.h"
 #include <math.h>
+#include <list>
 namespace ExactArithmetic{
 
     // ================================
@@ -29,6 +30,7 @@ namespace ExactArithmetic{
                 digits.push_back(*cit-'0');
             }
             else{
+                std::cout << S;
                 throw std::invalid_argument("Invalid Input");
             }
         }
@@ -202,6 +204,32 @@ namespace ExactArithmetic{
         }
     }
 
+    Integer & Integer::operator/=(const Integer & I){
+        if(I == Integer(0)){
+            throw DivideByZeroError();
+        }
+        else{
+            Integer Temp(toString());
+            Integer Count;
+            while(Temp >= Integer(0)){
+                try
+                { 
+                    Temp -= I;
+                    if(Temp >= Integer(0))
+                        Count++;
+                }
+                catch(ExactArithmetic::NegativeNumberError)
+                {
+                    Count.normalise();
+                    *this = Count;
+                    return *this;
+                }
+            }
+        *this = Count;
+        return *this;
+        }
+    }
+
     // ================================
     //       Private Functions
     // ================================
@@ -236,29 +264,26 @@ namespace ExactArithmetic{
     }
 
     void Integer::normalise() {
-
-        auto D = --digits.end();
-        do{
-            if(*D > 20){
-                std::cout << "Help" << std::endl;
-            }
-            if(*D > 9){
-                *D = *D % 10;
+        for(auto D = digits.end(); D != digits.begin();)
+        {
+            --D;
+            if((*D) > 9){
+                *D %= 10;
                 if(D == digits.begin()){
                     digits.push_front(1);
                     return;
                 }
-                else
-                    (*--D)++;
+                else{
+                    auto Dcopy = D;
+                    (*--Dcopy)++;
+                }
             }
             else if(*D < 0){
-                *D = *D + 10;
-                (*--D)--;
+                auto Dcpy = D;
+                *D += 10;
+                (*--Dcpy)--;
             }
-            else
-                --D;
-        }while(D!= digits.begin());
-
+        }
         removeLeadingZeros();
     }
 }
