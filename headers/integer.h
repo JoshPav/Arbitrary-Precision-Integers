@@ -23,6 +23,9 @@ namespace ExactArithmetic
       //  Converting constructor.
       Integer(unsigned long long int);
 
+      // Copy constructor
+      Integer( const Integer &);
+
       // Accepts a sequence of digits.
       // For any other input, throws a std::invalid_argument exception.
       // (For full integers, it should also allow an optional initial  '+' or '-' character.)

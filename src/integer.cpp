@@ -19,6 +19,12 @@ namespace ExactArithmetic{
         }
     }
 
+    Integer::Integer( const Integer & I){
+        for(Digit d : I.digits){
+            digits.push_back(d);
+        }
+    }
+
     Integer::Integer(const std::string &S){
         for(auto cit = S.begin(); cit != S.end(); cit++){
             if(48 <= *cit && *cit<= 57){
@@ -100,7 +106,7 @@ namespace ExactArithmetic{
 
     // Post-increment ++
     Integer Integer::operator++(int){
-        Integer temp(toString());
+        Integer temp(*this);
         digits.back()++;
         normalise();
         return temp;
@@ -124,7 +130,7 @@ namespace ExactArithmetic{
             throw NegativeNumberError();
         }
         else{
-            Integer temp(toString());
+            Integer temp(*this);
             digits.back()--;
             normalise();
             return temp;
@@ -136,20 +142,16 @@ namespace ExactArithmetic{
     // ================================
 
     Integer Integer::operator-(const Integer & I) const{
-        Integer temp(toString());
-        return temp -= I;
+        return Integer(*this) -= I;
     }
 
     Integer Integer::operator+(const Integer & I) const{
-        Integer temp(toString());
-        return temp += I;
+        return Integer(*this) += I;
     }
 
     Integer Integer::operator/(const Integer & I) const{
-        Integer temp(toString());
-        return temp/=I;
-    } // Throws a DivideByZeroError for a 0 divisor.
-
+        return Integer(*this)/=I;
+    } 
 
     // ================================
     //       Compound Operators
@@ -176,7 +178,7 @@ namespace ExactArithmetic{
 
     Integer & Integer::operator+=(const Integer & I){
         if(digits.size() >= I.digits.size()){
-            Integer temp(toString());
+            Integer temp(*this);
 
             auto it1 = digits.end();
             auto it2 = I.digits.end();
@@ -198,7 +200,7 @@ namespace ExactArithmetic{
             throw DivideByZeroError();
         }
         else{
-            Integer Temp(toString());
+            Integer Temp(*this);
             Integer Count;
             while(Temp >= Integer(0)){
                 try
