@@ -2,5 +2,9 @@ main.cpp
 .vscode/ipch/
 bin/
 obj/
+tests/
+tom-tests/
+.vscode/
+Makefile
 *.o
 *.h.gch
