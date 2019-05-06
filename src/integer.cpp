@@ -140,45 +140,41 @@ namespace ExactArithmetic{
             throw NegativeNumberError();
         }
         else{
-            Integer temp1(toString());
+            Integer temp(toString());
 
-            auto it1 = temp1.digits.end();
+            auto it1 = temp.digits.end();
             auto it2 = I.digits.end();
 
             do{
                 it1--;
                 it2--;
-                *it1 = *it1 - *it2;
+                *it1 -= *it2;
             }while(it2 != I.digits.begin());
 
-            temp1.normalise();
-            return temp1;
+            temp.normalise();
+            return temp;
         }
     }
 
-    //Arithmetic Operators
-    Integer Integer::operator+(const Integer & toAdd) const{
-        Integer temp;
-        if(digits.size() > toAdd.digits.size()){
-            return additionHelper(*this, toAdd);
+    Integer Integer::operator+(const Integer & I) const{
+        if(digits.size() >= I.digits.size()){
+            Integer temp(toString());
+
+            auto it1 = temp.digits.end();
+            auto it2 = I.digits.end();
+
+            do{
+                it1--;
+                it2--;
+                *it1 += *it2;
+            }while(it2 != I.digits.begin());
+            temp.normalise();
+            return temp;
         }
-        else{
-            return additionHelper(toAdd, *this);
-        }
+        else
+            return I + *this;
     }
 
-    Integer Integer::additionHelper(const Integer & larger, const Integer & smaller) const{
-        Integer temp(larger.toString());
-        auto toAddItr = smaller.digits.end();
-        auto itr = temp.digits.end();
-        do{
-            toAddItr--;
-            itr--;
-            *itr += *toAddItr;
-        }while(toAddItr != smaller.digits.begin());
-        temp.normalise();
-        return temp;
-    }
     Integer Integer::operator/(const Integer & I) const{
         if(I == Integer(0)){
             throw DivideByZeroError();
@@ -225,6 +221,25 @@ namespace ExactArithmetic{
             normalise();
             return *this;
         }
+    }
+
+    Integer & Integer::operator+=(const Integer & I){
+        if(digits.size() >= I.digits.size()){
+            Integer temp(toString());
+
+            auto it1 = digits.end();
+            auto it2 = I.digits.end();
+
+            do{
+                it1--;
+                it2--;
+                *it1 += *it2;
+            }while(it2 != I.digits.begin());
+            normalise();
+            return *this;
+        }
+        else
+            return *this = (I + *this);
     }
 
     Integer & Integer::operator/=(const Integer & I){
