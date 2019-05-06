@@ -158,7 +158,7 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
             ExactArithmetic::Integer B("100000");
             ExactArithmetic::Integer C = A/B;
 
-            BOOST_CHECK_EQUAL( C , ExactArithmetic::Integer(2865490000));
+            BOOST_CHECK_EQUAL( C , ExactArithmetic::Integer(2865490));
         }
 
         BOOST_AUTO_TEST_CASE ( NotDivisible )

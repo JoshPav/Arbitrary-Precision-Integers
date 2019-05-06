@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_SUITE ( CompoundOperatorTests )
             ExactArithmetic::Integer B("100000");
             A/=B;
 
-            BOOST_CHECK_EQUAL( A , ExactArithmetic::Integer(2865490000));
+            BOOST_CHECK_EQUAL( A , ExactArithmetic::Integer(2865490));
         }
 
         BOOST_AUTO_TEST_CASE ( CompoundNotDivisible )
