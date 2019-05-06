@@ -129,7 +129,82 @@ BOOST_AUTO_TEST_SUITE ( CompoundOperatorTests )
     BOOST_AUTO_TEST_SUITE_END ()
 
     BOOST_AUTO_TEST_SUITE ( MultiplicationTests )
-    BOOST_AUTO_TEST_SUITE_END ()
+
+        BOOST_AUTO_TEST_CASE ( TimesZero )
+        {
+            Integer A("2651561");
+            Integer B;
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL(A,Integer());
+
+        }
+
+        BOOST_AUTO_TEST_CASE ( TimesOne )
+        {
+            Integer A("2651561");
+            Integer B("1");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL(A,A);
+
+        }
+
+        BOOST_AUTO_TEST_CASE ( Square )
+        {
+            Integer A("156156");
+            Integer B("156156");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL(A,Integer("24384696336"));
+
+        }
+
+        BOOST_AUTO_TEST_CASE ( LotsOfCarry )
+        {
+            Integer A("99999999999");
+            Integer B("3");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL(A,Integer("299999999997"));
+
+        }
+
+        BOOST_AUTO_TEST_CASE ( TwoSmall )
+        {
+            Integer A("190");
+            Integer B("200");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL(A,Integer("38000"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( SmallLarge )
+        {
+            Integer A("10");
+            Integer B("6156163156165");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL(A,Integer("61561631561650"));
+        }
+
+        BOOST_AUTO_TEST_CASE ( LargeSmall )
+        {
+            Integer A("6156163156165");
+            Integer B("10");
+
+            A*=B;
+
+            BOOST_CHECK_EQUAL(A,Integer("61561631561650"));
+        }
+
+    BOOST_AUTO_TEST_SUITE_END()
 
     BOOST_AUTO_TEST_SUITE ( DivisionTests )
 

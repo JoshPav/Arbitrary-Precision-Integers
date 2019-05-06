@@ -141,13 +141,18 @@ namespace ExactArithmetic{
     //       Arithmetic Operators
     // ================================
 
+    Integer Integer::operator+(const Integer & I) const{
+        return Integer(*this) += I;
+    }
+
     Integer Integer::operator-(const Integer & I) const{
         return Integer(*this) -= I;
     }
 
-    Integer Integer::operator+(const Integer & I) const{
-        return Integer(*this) += I;
+    Integer Integer::operator*(const Integer & I) const{
+        return Integer(*this) *= I;
     }
+
 
     Integer Integer::operator/(const Integer & I) const{
         return Integer(*this)/=I;
@@ -156,6 +161,25 @@ namespace ExactArithmetic{
     // ================================
     //       Compound Operators
     // ================================
+    
+    Integer & Integer::operator+=(const Integer & I){
+        if(digits.size() >= I.digits.size()){
+            Integer temp(*this);
+
+            auto it1 = digits.end();
+            auto it2 = I.digits.end();
+
+            do{
+                it1--;
+                it2--;
+                *it1 += *it2;
+            }while(it2 != I.digits.begin());
+            normalise();
+            return *this;
+        }
+        else
+            return *this = (I + *this);
+    }
 
     Integer & Integer::operator-=(const Integer & I){
         if(digits.size() < I.digits.size()){
@@ -176,23 +200,22 @@ namespace ExactArithmetic{
         }
     }
 
-    Integer & Integer::operator+=(const Integer & I){
-        if(digits.size() >= I.digits.size()){
-            Integer temp(*this);
-
-            auto it1 = digits.end();
-            auto it2 = I.digits.end();
-
-            do{
-                it1--;
-                it2--;
-                *it1 += *it2;
-            }while(it2 != I.digits.begin());
-            normalise();
-            return *this;
+    Integer & Integer::operator*=(const Integer & I){
+        if(I == Integer()){
+            return (*this = Integer());
         }
-        else
-            return *this = (I + *this);
+        else if(I.digits.size() > digits.size())
+        {
+            return *this = (I*(*this));
+        }
+        else{
+            Integer Temp(*this);
+            for(Integer A("1");A < I;++A){
+                *this += Temp;
+                normalise();
+            }
+        }
+        return *this;
     }
 
     Integer & Integer::operator/=(const Integer & I){
