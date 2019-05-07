@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
     BOOST_AUTO_TEST_SUITE_END()
 
 
-    BOOST_AUTO_TEST_SUITE(multiplicationTests)
+    BOOST_AUTO_TEST_SUITE(MultiplicationTests)
 
         BOOST_AUTO_TEST_CASE ( ZeroTimesZero )
         {
