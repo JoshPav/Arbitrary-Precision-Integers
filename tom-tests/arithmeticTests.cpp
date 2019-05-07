@@ -1,5 +1,4 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE IntegerTests
 #include <boost/test/unit_test.hpp>
 
 #include "integer.h"
@@ -157,18 +156,8 @@ BOOST_AUTO_TEST_SUITE(arithmeticTests)
       BOOST_CHECK_EQUAL ( C , Integer("900000000009900000000000000000000") );
     }
 
-    BOOST_AUTO_TEST_CASE ( LotsOfZeros )
-    {
-      Integer A("10000000000000000");
-      Integer B("90000000000990000");
 
-      Integer C = A*B;
-
-      BOOST_CHECK_EQUAL ( C , Integer("900000000009900000000000000000000") );
-    }
-
-
-    BOOST_AUTO_TEST_CASE ( LotsOfZeros )
+    BOOST_AUTO_TEST_CASE ( LotsOfCarry )
     {
       Integer A("9999999");
       Integer B("3");
