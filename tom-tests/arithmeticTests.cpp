@@ -7,7 +7,7 @@
 using namespace ExactArithmetic;
 
 
-BOOST_AUTO_TEST_SUITE(arithmeticTests)
+BOOST_AUTO_TEST_SUITE(ArithmeticTests)
 
   BOOST_AUTO_TEST_SUITE(additionTests)
 
@@ -155,7 +155,6 @@ BOOST_AUTO_TEST_SUITE(arithmeticTests)
 
       BOOST_CHECK_EQUAL ( C , Integer("900000000009900000000000000000000") );
     }
-
 
     BOOST_AUTO_TEST_CASE ( LotsOfCarry )
     {

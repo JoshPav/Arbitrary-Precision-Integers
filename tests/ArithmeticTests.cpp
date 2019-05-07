@@ -41,11 +41,11 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
         BOOST_AUTO_TEST_CASE ( SubLongLong )
         {
             Integer A("4324237498237492927349247892");
-            Integer B("3324237498237492927349247892");
+            Integer B("3324237498237492927349247893");
 
             Integer C = A-B;
 
-            BOOST_CHECK_EQUAL(C,Integer("1000000000000000000000000000"));
+            BOOST_CHECK_EQUAL(C,Integer("999999999999999999999999999"));
         }
 
         BOOST_AUTO_TEST_CASE ( SubCarryOver )

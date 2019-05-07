@@ -7,7 +7,7 @@
 using namespace ExactArithmetic;
 
 
-BOOST_AUTO_TEST_SUITE(constructorTests)
+BOOST_AUTO_TEST_SUITE(ConstructorTests)
 
 // ==
 
