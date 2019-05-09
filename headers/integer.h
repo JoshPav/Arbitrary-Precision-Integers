@@ -57,9 +57,6 @@ namespace ExactArithmetic
       Integer operator--(int); // post-decrement
 
       std::string toString() const;
-      int compare(const Integer &) const;
-      void normalise();
-      Integer additionHelper(const Integer &, const Integer &) const;
 
       // Friend declarations
       friend std::ostream & operator<<(std::ostream &, const Integer &);
@@ -73,6 +70,8 @@ namespace ExactArithmetic
       void normalise();
 
       void removeLeadingZeros();
+
+      Integer additionHelper(const Integer &, const Integer &) const;
 
       // The integer is represented as a list of digits.
       std::list<Digit> digits {};
