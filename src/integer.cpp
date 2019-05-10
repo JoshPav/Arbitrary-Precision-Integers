@@ -96,7 +96,7 @@ namespace ExactArithmetic{
     // ================================
     //      Increment Operators
     // ================================
-    
+
     // ++ Pre-increment
     Integer & Integer::operator++(){
         ++digits.back();
@@ -110,7 +110,7 @@ namespace ExactArithmetic{
         digits.back()++;
         normalise();
         return temp;
-    } 
+    }
 
     // -- Pre-decrement
     Integer & Integer::operator--(){
@@ -122,7 +122,7 @@ namespace ExactArithmetic{
             normalise();
             return *this;
         }
-    }  
+    }
 
     // Post-decrement --
     Integer Integer::operator--(int){
@@ -135,7 +135,7 @@ namespace ExactArithmetic{
             normalise();
             return temp;
         }
-    } 
+    }
 
     // ================================
     //       Arithmetic Operators
@@ -156,18 +156,18 @@ namespace ExactArithmetic{
 
     Integer Integer::operator/(const Integer & I) const{
         return Integer(*this)/=I;
-    } 
+    }
 
     Integer Integer::operator%(const Integer & I) const{
         return Integer(*this)%=I;
-    } 
+    }
 
     // ================================
     //       Compound Operators
     // ================================
-    
+
     Integer & Integer::operator+=(const Integer & I){
-        if(digits.size() >= I.digits.size()){
+        /*if(digits.size() >= I.digits.size()){
             Integer temp(*this);
 
             auto it1 = digits.end();
@@ -182,7 +182,7 @@ namespace ExactArithmetic{
             return *this;
         }
         else
-            return *this = (I + *this);
+            return *this = (I + *this);*/
     }
 
     Integer & Integer::operator-=(const Integer & I){
@@ -234,7 +234,7 @@ namespace ExactArithmetic{
                 Total += temp;
 
             }while(bottomItr != I.digits.begin());
-            
+
             return *this= Total;
         }
         else{
@@ -251,7 +251,7 @@ namespace ExactArithmetic{
             Integer Count;
             while(Temp >= Integer(0)){
                 try
-                { 
+                {
                     Temp -= I;
                     if(Temp >= Integer(0))
                         Count++;
@@ -278,7 +278,7 @@ namespace ExactArithmetic{
             Integer Count;
             while(Temp >= I){
                 try
-                { 
+                {
                     Temp -= I;
                 }
                 catch(ExactArithmetic::NegativeNumberError)
