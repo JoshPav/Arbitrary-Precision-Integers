@@ -167,7 +167,7 @@ namespace ExactArithmetic{
     // ================================
 
     Integer & Integer::operator+=(const Integer & I){
-        /*if(digits.size() >= I.digits.size()){
+        if(digits.size() >= I.digits.size()){
             Integer temp(*this);
 
             auto it1 = digits.end();
@@ -182,27 +182,7 @@ namespace ExactArithmetic{
             return *this;
         }
         else
-            return *this = (I + *this);*/
-            if(I.toString() == "0" and this.toString() == "0")
-              return Integer();
-
-          if(digits.size() >= I.digits.size()){
-           Integer temp(*this);
-           auto toAddItr = I.digits.end();
-           for(auto itr = temp.digits.end();itr != temp.digits.begin(); itr--){
-             toAddItr--;
-               *itr += *toAddItr;
-               if(toAddItr == I.digits.end()){
-                   break;
-               }
-
-           }
-           temp.normalise();
-           return temp;
-         }
-         else{
-           return *this = (I + *this);
-         }
+            return *this = (I + *this);
     }
 
     Integer & Integer::operator-=(const Integer & I){
