@@ -339,7 +339,7 @@ BOOST_AUTO_TEST_SUITE ( ArithmeticTests )
 
             BOOST_CHECK_EQUAL( C , ExactArithmetic::Integer("10000000"));
         }
-        
+
     BOOST_AUTO_TEST_SUITE_END()
 
     BOOST_AUTO_TEST_SUITE ( ModuloTests )
