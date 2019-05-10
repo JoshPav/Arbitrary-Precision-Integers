@@ -183,6 +183,9 @@ namespace ExactArithmetic{
         }
         else
             return *this = (I + *this);*/
+            if(I.toString() == "0" and this.toString() == "0")
+              return Integer();
+
           if(digits.size() >= I.digits.size()){
            Integer temp(*this);
            auto toAddItr = I.digits.end();
