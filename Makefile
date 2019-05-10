@@ -20,8 +20,15 @@ OBJECTS = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
 TEST_OBJECTS = $(patsubst $(TEST_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(TESTS))
 #TEST_OBJECTS := $(filter-out $(TEST_DIR)/ArithmeticTests.cpp, $(TEST_OBJECTS))
 
+<<<<<<< HEAD
 tests = ConstructorTests,ComparisonTests,IncrementTests,ArithmeticTests
 log_lvl = error
+=======
+tests = ConstructorTests,ComparisonTests,IncrementTests,ArithmeticTests,CompoundOperatorTests
+log_lvl = error
+report_lvl = confirm
+progress = no
+>>>>>>> development
 
 make_directories:
 	@ mkdir -p $(BUILD_DIR)
@@ -37,7 +44,11 @@ run: build $(OUTPUT_DIR)/$(TARGET)
 	@ ./$(OUTPUT_DIR)/$(TARGET)
 
 run_tests: build_tests $(OUTPUT_DIR)/$(TEST_TARGET)
+<<<<<<< HEAD
 	-@ ./$(OUTPUT_DIR)/$(TEST_TARGET) --log_level=$(log_lvl) --run_test=$(tests) 
+=======
+	@ ./$(OUTPUT_DIR)/$(TEST_TARGET) --log_level=$(log_lvl) --report_level=$(report_lvl) --run_test=$(tests) --show_progress=$(progress)
+>>>>>>> development
 	
 # Make object files
 $(OBJECTS): $(BUILD_DIR)/%.o : $(SOURCE_DIR)/%.cpp

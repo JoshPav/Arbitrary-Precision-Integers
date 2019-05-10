@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.o
 *.h.gch
 compTests
@@ -7,3 +8,11 @@ main.cpp
 .vscode/ipch/
 bin/
 obj/
+=======
+main.cpp
+.vscode/ipch/
+bin/
+obj/
+*.o
+*.h.gch
+>>>>>>> development

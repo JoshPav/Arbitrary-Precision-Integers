@@ -23,10 +23,13 @@ namespace ExactArithmetic
       //  Converting constructor.
       Integer(unsigned long long int);
 
+      // Copy constructor
+      Integer( const Integer &);
+
       // Accepts a sequence of digits.
       // For any other input, throws a std::invalid_argument exception.
       // (For full integers, it should also allow an optional initial  '+' or '-' character.)
-      explicit Integer(const std::string &) throw (std::invalid_argument);
+      explicit Integer(const std::string &);
 
       //  Arithmetic Operators
       Integer operator+(const Integer &) const;
@@ -67,6 +70,8 @@ namespace ExactArithmetic
 
       int compare(const Integer &) const;
 
+      Integer additionHelper(const Integer &, const Integer &) const;
+
       void normalise();
 
       void removeLeadingZeros();
@@ -76,9 +81,11 @@ namespace ExactArithmetic
       // The integer is represented as a list of digits.
       std::list<Digit> digits {};
   };
-
-  std::ostream & operator<<(std::ostream &, const Integer &);
-  std::istream & operator>>(std::istream &, Integer &);
 }
 
+<<<<<<< HEAD
 #endif
+=======
+
+#endif
+>>>>>>> development

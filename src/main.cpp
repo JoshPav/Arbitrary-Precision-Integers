@@ -2,12 +2,20 @@
 #include "integer.h"
 
 using namespace ExactArithmetic;
-
+/*
 int main(){
 
-  Integer myInt;
+  std::cout << ExactArithmetic::Integer("1000");
 
-  myInt.toString();
+  ExactArithmetic::Integer A("9999999");
+  ExactArithmetic::Integer B("3");
+  // 29999997
+  ExactArithmetic::Integer C = A++;
+
+  std::cout << "A: " << A << std::endl;
+  std::cout << "B: " << B << std::endl;
+  std::cout << "C: " << C << std::endl;
 
   return 0;
 }
+*/
