@@ -202,7 +202,7 @@ namespace ExactArithmetic{
            return temp;
          }
          else{
-           return return *this = (I + *this);
+           return *this = (I + *this);
          }
     }
 
