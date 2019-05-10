@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_SUITE(ArithmeticTests)
     Integer newInt2(7238);
     Integer newInt3 = newInt + newInt2;
 
-    BOOST_CHECK_EQUAL(newInt3 ,Integer("24087");
+    BOOST_CHECK_EQUAL(newInt3 ,Integer("24087"));
     }
 
     BOOST_AUTO_TEST_CASE(addMulyipleOverflowAndFrontAppend){
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_SUITE(ArithmeticTests)
 
     BOOST_CHECK_EQUAL(newInt3.toString() ,Integer("114087");
     }
-    BOOST_AUTO_TEST_CASE(>MAXINT){
+    BOOST_AUTO_TEST_CASE(greaterMaxInt){
     Integer newInt(18446744073709551615);
     Integer newInt2(2);
     Integer newInt3 = newInt + newInt2;
