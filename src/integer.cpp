@@ -184,19 +184,14 @@ namespace ExactArithmetic{
         else
             return *this = (I + *this);*/
           if(digits.size() >= I.digits.size()){
-          bool flipflop = true;
            Integer temp(*this);
            auto toAddItr = --I.digits.end();
            for(auto itr = temp.digits.end();itr != temp.digits.begin(); itr--){
-               if(flipflop){
-                   itr--;
-                   flipflop = false;
-               }
                *itr += *toAddItr;
-               toAddItr--;
                if(toAddItr == I.digits.end()){
                    break;
                }
+               toAddItr--;
            }
            temp.normalise();
            return temp;
