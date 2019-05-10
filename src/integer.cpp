@@ -183,7 +183,7 @@ namespace ExactArithmetic{
         }
         else
             return *this = (I + *this);*/
-            return I;
+            return *this;
     }
 
     Integer & Integer::operator-=(const Integer & I){
