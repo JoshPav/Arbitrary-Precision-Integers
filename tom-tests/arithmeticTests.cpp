@@ -65,14 +65,14 @@ BOOST_AUTO_TEST_SUITE(ArithmeticTests)
     Integer newInt2(97238);
     Integer newInt3 = newInt + newInt2;
 
-    BOOST_CHECK_EQUAL(newInt3.toString() ,Integer("114087");
+    BOOST_CHECK_EQUAL(newInt3 ,Integer("114087"));
     }
     BOOST_AUTO_TEST_CASE(greaterMaxInt){
     Integer newInt(18446744073709551615);
     Integer newInt2(2);
     Integer newInt3 = newInt + newInt2;
 
-    BOOST_CHECK_EQUAL(newInt3.toString() ,Integer("18446744073709551617");
+    BOOST_CHECK_EQUAL(newInt3 ,Integer("18446744073709551617"));
     }
 
   BOOST_AUTO_TEST_SUITE_END()
