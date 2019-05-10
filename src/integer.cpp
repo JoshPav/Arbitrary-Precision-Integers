@@ -183,9 +183,9 @@ namespace ExactArithmetic{
         }
         else
             return *this = (I + *this);*/
-            if(digits.size() >= I.digits.size()){
+          if(digits.size() >= I.digits.size()){
           bool flipflop = true;
-           Integer temp(this.toString());
+           Integer temp(*this);
            auto toAddItr = --I.digits.end();
            for(auto itr = temp.digits.end();itr != temp.digits.begin(); itr--){
                if(flipflop){
