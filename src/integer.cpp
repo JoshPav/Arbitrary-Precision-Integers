@@ -187,11 +187,12 @@ namespace ExactArithmetic{
            Integer temp(*this);
            auto toAddItr = I.digits.end();
            for(auto itr = temp.digits.end();itr != temp.digits.begin(); itr--){
+             toAddItr--;
                *itr += *toAddItr;
                if(toAddItr == I.digits.end()){
                    break;
                }
-               toAddItr--;
+
            }
            temp.normalise();
            return temp;
