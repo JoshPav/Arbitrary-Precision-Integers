@@ -183,7 +183,27 @@ namespace ExactArithmetic{
         }
         else
             return *this = (I + *this);*/
-            return *this;
+            if(digits.size() >= I.digits.size()){
+          bool flipflop = true;
+           Integer temp(digits.toString());
+           auto toAddItr = --I.digits.end();
+           for(auto itr = temp.digits.end();itr != temp.digits.begin(); itr--){
+               if(flipflop){
+                   itr--;
+                   flipflop = false;
+               }
+               *itr += *toAddItr;
+               toAddItr--;
+               if(toAddItr == smaller.digits.end()){
+                   break;
+               }
+           }
+           temp.normalise();
+           return temp;
+         }
+         else{
+           return return *this = (I + *this);
+         }
     }
 
     Integer & Integer::operator-=(const Integer & I){
