@@ -1,6 +1,6 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE IntegerTests
-//#include <boost/test/unit_test.hpp>
+//#define BOOST_TEST_MODULE IntegerTests
+#include <boost/test/unit_test.hpp>
 
 #include "integer.h"
 #include <stdexcept>
