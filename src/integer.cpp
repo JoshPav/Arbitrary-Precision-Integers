@@ -167,7 +167,7 @@ namespace ExactArithmetic{
     // ================================
 
     Integer & Integer::operator+=(const Integer & I){
-        /*if(digits.size() >= I.digits.size()){
+        if(digits.size() >= I.digits.size()){
             Integer temp(*this);
 
             auto it1 = digits.end();
@@ -182,7 +182,8 @@ namespace ExactArithmetic{
             return *this;
         }
         else
-            return *this = (I + *this);*/
+            return *this = (I + *this);
+
     }
 
     Integer & Integer::operator-=(const Integer & I){
@@ -295,7 +296,27 @@ namespace ExactArithmetic{
     //       Private Functions
     // ================================
 
+    std::string Integer::toString() const{
+        std::string S = "";
+        for(Digit I : digits){
+            S += std::to_string(I);
+        }
+        return S;
+    }
 
+    int Integer::compare(const Integer & other) const{
+        if(digits.size() < other.digits.size()){
+            return -1;
+        }
+        else if(digits.size() > other.digits.size()){
+            return 1;
+        }
+        else{
+            auto Pair = std::mismatch(digits.begin(),digits.end(),
+                                other.digits.begin(),other.digits.end());
+            return *Pair.first - *Pair.second;
+        }
+    }
 
     void Integer::removeLeadingZeros(){
         auto D = digits.begin();
