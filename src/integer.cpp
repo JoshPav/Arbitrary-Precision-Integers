@@ -185,7 +185,7 @@ namespace ExactArithmetic{
             return *this = (I + *this);*/
           if(digits.size() >= I.digits.size()){
            Integer temp(*this);
-           auto toAddItr = --I.digits.end();
+           auto toAddItr = I.digits.end();
            for(auto itr = temp.digits.end();itr != temp.digits.begin(); itr--){
                *itr += *toAddItr;
                if(toAddItr == I.digits.end()){
