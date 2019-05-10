@@ -194,7 +194,7 @@ namespace ExactArithmetic{
                }
                *itr += *toAddItr;
                toAddItr--;
-               if(toAddItr == smaller.digits.end()){
+               if(toAddItr == I.digits.end()){
                    break;
                }
            }
